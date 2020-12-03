@@ -3,14 +3,12 @@ function main() {
 	.then(response => response.text())
 	.then(data => {
 		data = data.split("\n");
-		var a_data = 0;
-		var b_data = 0;
-		for(var a = 0; a < data.length; ++a) {
-			for(var b = 0; b < data.length; ++b) {
-				a_data = parseInt(data[a]);
-				b_data = parseInt(data[b]);
-				var sum = a_data + b_data;
-				if(sum == 2020) {
+		const length = data.length;
+		for(var a = 0; a < length; ++a) {
+			for(var b = 0; b < length; ++b) {
+				const a_data = parseInt(data[a]);
+				const b_data = parseInt(data[b]);
+				if(a_data + b_data == 2020) {
 					return a_data * b_data;
 				}
 			}
