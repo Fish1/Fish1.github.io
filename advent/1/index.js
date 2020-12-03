@@ -3,11 +3,6 @@ function main() {
 	.then(response => response.text())
 	.then(data => {
 		data = data.split("\n");
-		for(var index = 0; index < data.length ; ++index) {
-			data[index] = parseInt(data[index]);
-		}
-		data.splice(-1, 1);
-
 		var a_data = 0;
 		var b_data = 0;
 		for(var a = 0; a < data.length; ++a) {
