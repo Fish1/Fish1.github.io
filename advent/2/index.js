@@ -1,4 +1,4 @@
-function validate(data) {
+function validate1(data) {
 	var count = 0;
 	const length = data.password.length;
 	for(var index = 0; index < length; ++index) {
@@ -11,6 +11,22 @@ function validate(data) {
 		return false;
 	}
 	return true;
+}
+
+function validate2(data) {
+	const a = data.password[data.min - 1] == data.character;	
+	const b = data.password[data.max - 1] == data.character;
+
+
+	if(a && b)  {
+		return false;
+	}
+
+	if(a || b) {
+		return true;
+	}
+
+	return false;
 }
 
 function parse(line) {
@@ -33,21 +49,30 @@ function main() {
 	fetch("./data.txt")
 	.then(response => response.text())
 	.then(data => {
-		var answer = 0;
+		var answer1 = 0;
+		var answer2 = 0
 		data = data.split("\n");
 		const length = data.length - 1;
 		for(var index = 0; index < length; ++index) {
 			line = data[index];
 			parsedLine = parse(line);
-			if(validate(parsedLine)) {
-				++answer;
+			if(validate1(parsedLine)) {
+				answer1 += 1;
+			}
+			if(validate2(parsedLine)) {
+				answer2 += 1;
 			}
 		}
-		return answer;
+		return {
+			a: answer1,
+			b: answer2
+		}
 	})
 	.then(answer => {
-		const answerDom = document.getElementById("answer");
-		answerDom.innerHTML = answer;
+		const answer1Dom = document.getElementById("answer1");
+		answer1Dom.innerHTML = answer.a;
+		const answer2Dom = document.getElementById("answer2");
+		answer2Dom.innerHTML = answer.b;
 	});
 }
 
